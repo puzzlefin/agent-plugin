@@ -1,0 +1,10 @@
+{
+  "name": "puzzle",
+  "version": "1.0.0",
+  "description": "Read and manage a company's books in Puzzle: transactions, categorization, bills, invoices, reconciliation, reports and runway.",
+  "author": { "name": "Puzzle", "email": "support@puzzle.io", "url": "https://puzzle.io" },
+  "homepage": "https://app.puzzle.io/mcp/docs",
+  "repository": "https://github.com/puzzlefin/puzzle-plugin",
+  "license": "MIT",
+  "keywords": ["accounting", "bookkeeping", "finance", "startups", "ledger", "reports"]
+}

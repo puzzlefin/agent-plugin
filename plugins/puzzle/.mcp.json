@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "puzzle": { "type": "http", "url": "https://app.puzzle.io/mcp" }
+  }
+}

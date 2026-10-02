@@ -1,0 +1,16 @@
+{
+  "name": "puzzle",
+  "owner": { "name": "Puzzle", "email": "support@puzzle.io" },
+  "metadata": {
+    "description": "Puzzle's plugins for Claude: connect your company's books in Puzzle."
+  },
+  "plugins": [
+    {
+      "name": "puzzle",
+      "source": "./plugins/puzzle",
+      "description": "Read and manage a company's books in Puzzle: transactions, categorization, bills, invoices, reconciliation, reports and runway.",
+      "category": "finance",
+      "homepage": "https://app.puzzle.io/mcp/docs"
+    }
+  ]
+}

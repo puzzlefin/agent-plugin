@@ -1,0 +1,46 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "puzzle",
+  "version": "1.0.0",
+  "description": "Read and manage a company's books in Puzzle: transactions, categorization, bills, invoices, reconciliation, reports and runway.",
+  "author": { "name": "Puzzle", "email": "support@puzzle.io", "url": "https://puzzle.io" },
+  "homepage": "https://app.puzzle.io/mcp/docs",
+  "repository": "https://github.com/puzzlefin/puzzle-plugin",
+  "license": "MIT",
+  "keywords": ["accounting", "bookkeeping", "finance", "startups", "ledger", "reports"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Puzzle",
+        "shortDescription": "Your startup's books",
+        "longDescription": "Puzzle keeps a startup's double-entry books from its bank, card, payroll and payment data. Connect your Puzzle account to ask about cash, burn and runway, pull a balance sheet or income statement, review and categorize transactions, work through bills and invoices, and reconcile accounts.\n\nThe connection is read-only until you turn on write access, and every change to the books is confirmed with you before it is made. You choose which companies the connection can see when you sign in, and you can revoke it any time in Puzzle under Settings → Connected apps.",
+        "developerName": "Puzzle",
+        "category": "Finance",
+        "capabilities": [
+          "Financial reports: balance sheet, income statement, cash flow",
+          "Cash, burn rate and runway",
+          "Search and categorize transactions",
+          "Bills, AP aging and vendor spend",
+          "Invoices, AR aging and customer payments",
+          "Account and statement reconciliation",
+          "Revenue recognition and ARR",
+          "Month-end close checklists"
+        ],
+        "websiteURL": "https://puzzle.io",
+        "supportURL": "https://help.puzzle.io",
+        "privacyPolicyURL": "https://puzzle.io/legal/privacy",
+        "termsOfServiceURL": "https://puzzle.io/legal/terms-of-service",
+        "defaultPrompt": [
+          "What's our runway, and how has monthly burn changed this quarter?",
+          "Show last month's income statement and explain the biggest changes.",
+          "Which transactions still need a category?"
+        ],
+        "brandColor": "#309667",
+        "brandColorDark": "#50F9AB",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "onboardingSkill": "./skills/get-started/SKILL.md"
+    }
+  }
+}
