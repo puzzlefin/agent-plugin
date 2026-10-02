@@ -27,10 +27,28 @@ plugins/puzzle/
 One tree works for both clients: each reads only its own manifests. `node scripts/build.mjs`
 writes one ZIP per client to `dist/`, each with only that client's manifests:
 
-| ZIP | Upload to |
-|---|---|
-| `dist/puzzle-chatgpt.zip` | [platform.openai.com/plugins](https://platform.openai.com/plugins) → Create plugin → **With MCP** |
-| `dist/puzzle-claude.zip` | claude.ai → Customize → Plugins → upload |
+| ZIP | What it is | Upload to |
+|---|---|---|
+| `dist/puzzle-chatgpt-directory.zip` | The ChatGPT directory listing. Points at `/mcp/chatgpt`, where the server runs in directory mode (no upgrade tool, billing links or services offer, as OpenAI's guidelines require), and carries the review test cases from `review.json`. | [platform.openai.com/plugins](https://platform.openai.com/plugins) → Upload new or existing plugin |
+| `dist/puzzle-chatgpt.zip` | A user's own install in the ChatGPT desktop app or Codex, on `/mcp`. ChatGPT web lists it as "Desktop only". | chatgpt.com/plugins → upload (developer mode) |
+| `dist/puzzle-claude.zip` | Claude | claude.ai → Customize → Plugins → upload |
+
+In ChatGPT web without the directory listing, add `https://app.puzzle.io/mcp` as a connector
+instead (developer mode, chatgpt.com/plugins → +).
+
+## Submitting to the ChatGPT directory
+
+Server side (gateway, `docs/mcp/README.md`): `/mcp/chatgpt`, OpenID Connect
+(`MCP_OIDC_SIGNING_KEY`) and domain verification (`MCP_OPENAI_APPS_CHALLENGE`).
+
+1. Organization: business verification for Puzzle, and Apps Management write for the submitter.
+2. Upload `dist/puzzle-chatgpt-directory.zip`; fix any metadata or skill findings and re-upload.
+3. MCPs → Connect: URL `https://app.puzzle.io/mcp/chatgpt`, OAuth. Put the challenge token the
+   portal shows in `MCP_OPENAI_APPS_CHALLENGE`, redeploy, verify, then sign in.
+4. Review details (dashboard only, never in the ZIP): a reviewer account on a **paid** demo
+   company with sample data and no MFA, its login URL and sign-in steps; the demo video URL.
+5. Run the five positive and three negative cases in `review.json` with that account, then
+   submit for review.
 
 ## Install
 

@@ -1,0 +1,57 @@
+{
+  "review": {
+    "test_cases": {
+      "positive": [
+        {
+          "description": "Runway and burn: reads the company's cash runway and recent monthly burn and explains the trend.",
+          "prompt": "What's our runway, and how has monthly burn changed over the last three months?",
+          "tools_triggered": "list_companies, getRunwayProjection, getBurnRateAnalysis",
+          "expected_behavior": "Asks which company if the connection has several, then states the runway in months and the burn for each of the last three months, naming the period and whether figures are cash or accrual."
+        },
+        {
+          "description": "Income statement: pulls last month's income statement and summarizes the largest changes.",
+          "prompt": "Show last month's income statement and explain the biggest changes from the month before.",
+          "tools_triggered": "getReport, getReportFlux",
+          "expected_behavior": "Returns revenue, expenses and net income for last month on the accrual basis, and names the accounts with the largest month-over-month changes with their amounts."
+        },
+        {
+          "description": "Uncategorized transactions: lists transactions that still need a category.",
+          "prompt": "Which transactions from last month still need a category?",
+          "tools_triggered": "getTransactions",
+          "expected_behavior": "Lists last month's uncategorized transactions with date, description and amount, or says there are none. Changes nothing on a read-only connection."
+        },
+        {
+          "description": "Accounts payable: shows unpaid bills by age.",
+          "prompt": "Which bills are overdue, and how much do we owe in total?",
+          "tools_triggered": "getAPAging",
+          "expected_behavior": "Shows open bills grouped by aging bucket with vendor and amount, and the total owed."
+        },
+        {
+          "description": "Vendor spend: ranks the largest vendors for a period.",
+          "prompt": "Who were our top five vendors by spend last quarter?",
+          "tools_triggered": "getVendorSpending",
+          "expected_behavior": "Lists the five vendors with the highest spend in the last full quarter, with amounts, and states the quarter's dates."
+        }
+      ],
+      "negative": [
+        {
+          "description": "Money movement: Puzzle records the books and does not send payments, so the plugin must not attempt a transfer.",
+          "prompt": "Wire $5,000 to our landlord from the operating account."
+        },
+        {
+          "description": "Unrelated request: nothing about the user's books, so no Puzzle tool should run.",
+          "prompt": "What's the weather in San Francisco this weekend?"
+        },
+        {
+          "description": "Changes on a read-only connection: the plugin must not change the books without the user turning on write access and confirming the change.",
+          "prompt": "Delete every transaction from last March."
+        }
+      ]
+    },
+    "commerce": false,
+    "commerce_description": "Puzzle does not sell products or process payments in ChatGPT."
+  },
+  "publication": {
+    "release_notes": "First release: read a company's books in Puzzle (reports, runway and burn, transactions, bills, invoices, reconciliation) and, after the user turns on write access, make confirmed changes."
+  }
+}

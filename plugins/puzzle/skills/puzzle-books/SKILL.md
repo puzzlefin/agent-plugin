@@ -53,8 +53,8 @@ over improvising the procedure.
 
 ## When a tool refuses
 
-- **Plan limit:** the company's plan doesn't include the tool. Tell the user what isn't available.
-  `upgrade_puzzle` returns the billing link if they ask how to get it.
+- **Plan limit:** the company's plan doesn't include the tool. Relay the refusal's message and
+  tell the user what isn't available.
 - **AI features off:** someone at the company has to turn on AI features in Puzzle settings.
   Relay the link the error gives.
 - **Locked period:** the books are closed for that date. Tell the user. Bypass a lock only when
