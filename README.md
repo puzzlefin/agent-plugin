@@ -37,7 +37,7 @@ writes one ZIP per client to `dist/`, each with only that client's manifests:
 **Claude Code**
 
 ```bash
-claude plugin marketplace add puzzlefin/puzzle-plugin
+claude plugin marketplace add puzzlefin/agent-plugin
 claude plugin install puzzle@puzzle
 # then /mcp → plugin:puzzle:puzzle → Authenticate
 ```
@@ -45,7 +45,7 @@ claude plugin install puzzle@puzzle
 **Codex**
 
 ```bash
-codex plugin marketplace add puzzlefin/puzzle-plugin
+codex plugin marketplace add puzzlefin/agent-plugin
 codex plugin add puzzle@puzzle
 codex mcp login puzzle
 ```
