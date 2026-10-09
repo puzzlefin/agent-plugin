@@ -221,6 +221,24 @@
 
       .progress { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: rgba(11,12,11,.09); z-index: 20; }
       .progress > div { height: 100%; width: 0; background: linear-gradient(90deg, var(--green-dark), var(--purple)); }
+
+      body.review-mode .walkthrough { padding: 0; }
+      body.review-mode .walkthrough .browser-shell {
+        height: 720px;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      body.review-mode .walkthrough .browser-bar,
+      body.review-mode .walkthrough .mock,
+      body.review-mode .walkthrough .lower-third { display: none; }
+      body.review-mode .walkthrough .browser-shell video { height: 100%; object-fit: cover; }
+      body.review-mode .brand,
+      body.review-mode .grid,
+      body.review-mode .orb { transition: opacity 240ms ease; }
+      body.review-mode:has(.walkthrough.active) .brand,
+      body.review-mode:has(.walkthrough.active) .grid,
+      body.review-mode:has(.walkthrough.active) .orb { opacity: 0; }
     </style>
   </head>
   <body>
@@ -282,8 +300,10 @@
     </main>
 
     <script>
-      const DURATION = 46;
       const params = new URLSearchParams(location.search);
+      const reviewMode = params.get('mode') === 'review';
+      const reviewWalkthroughDuration = Math.max(1, Number(params.get('walkthroughDuration')) || 150);
+      let DURATION = 46;
       const started = performance.now();
       const scenes = [...document.querySelectorAll('.scene')];
       const video = document.querySelector('#walkthrough');
@@ -296,6 +316,26 @@
         [25.3, 32.2, 'Clean books', 'Find the transactions that still need attention'],
         [32.2, 39.5, 'Money in motion', 'See AP aging, invoices, and vendor spend'],
       ];
+
+      if (reviewMode) {
+        document.body.classList.add('review-mode');
+        const intro = document.querySelector('.intro');
+        const benefits = document.querySelector('.benefits');
+        const walkthrough = document.querySelector('.walkthrough');
+        const outro = document.querySelector('.outro');
+        const walkthroughStart = 5.5;
+        const walkthroughEnd = walkthroughStart + reviewWalkthroughDuration;
+
+        intro.dataset.end = String(walkthroughStart);
+        benefits.dataset.start = '-1';
+        benefits.dataset.end = '-1';
+        walkthrough.dataset.start = String(walkthroughStart);
+        walkthrough.dataset.end = String(walkthroughEnd);
+        outro.dataset.start = String(walkthroughEnd);
+        outro.dataset.end = String(walkthroughEnd + 6.5);
+        DURATION = walkthroughEnd + 6.5;
+        video.src = './walkthrough-review.mp4';
+      }
 
       video.addEventListener('canplay', () => { mock.style.display = 'none'; });
       video.addEventListener('error', () => { mock.style.display = 'grid'; });
@@ -310,7 +350,9 @@
         document.querySelector('#progress').style.width = `${Math.min(100, (t / DURATION) * 100)}%`;
         const current = chapters.find(([start, end]) => t >= start && t < end);
         if (current) { chapter.textContent = current[2]; chapterCopy.textContent = current[3]; }
-        if (t >= 10.8 && t < 39.5 && video.paused && video.readyState >= 2) video.play().catch(() => {});
+        const walkthroughScene = document.querySelector('.walkthrough');
+        const walkthroughIsActive = t >= Number(walkthroughScene.dataset.start) && t < Number(walkthroughScene.dataset.end);
+        if (walkthroughIsActive && video.paused && video.readyState >= 2) video.play().catch(() => {});
         requestAnimationFrame(tick);
       }
       tick();
