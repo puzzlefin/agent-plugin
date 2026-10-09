@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Puzzle in ChatGPT</title>
+    <style>
+      @font-face {
+        font-family: Inter;
+        src: local("Inter"), local("Arial");
+      }
+
+      :root {
+        --ink: #0b0c0b;
+        --paper: #f5f6f0;
+        --green: #50f9ab;
+        --green-dark: #309667;
+        --lilac: #dfc5f5;
+        --purple: #b950f9;
+        --line: rgba(11, 12, 11, 0.12);
+      }
+
+      * { box-sizing: border-box; }
+      html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Inter, Arial, sans-serif;
+      }
+
+      .stage {
+        position: relative;
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        isolation: isolate;
+      }
+
+      .grid {
+        position: absolute;
+        inset: 0;
+        opacity: 0.38;
+        background-image:
+          linear-gradient(var(--line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--line) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: linear-gradient(to bottom, black, transparent 88%);
+      }
+
+      .orb {
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(2px);
+        opacity: 0.72;
+        animation: drift 12s ease-in-out infinite alternate;
+      }
+      .orb.green { width: 410px; height: 410px; right: -130px; top: -170px; background: var(--green); }
+      .orb.lilac { width: 360px; height: 360px; left: -160px; bottom: -180px; background: var(--lilac); animation-delay: -4s; }
+      @keyframes drift { to { transform: translate(34px, 26px) scale(1.08); } }
+
+      .brand {
+        position: absolute;
+        top: 38px;
+        left: 54px;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+      .brand img { width: 38px; height: 38px; }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 13px;
+        border: 1px solid rgba(11, 12, 11, 0.18);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.64);
+        backdrop-filter: blur(12px);
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green-dark); }
+
+      .scene { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+      .scene.active { opacity: 1; }
+
+      .intro {
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 100px 120px 70px;
+      }
+      .intro-copy { transform: translateY(14px); animation: rise 900ms cubic-bezier(.2,.8,.2,1) forwards; }
+      .intro h1 {
+        margin: 24px auto 18px;
+        max-width: 980px;
+        font-size: 80px;
+        line-height: 0.98;
+        letter-spacing: -0.065em;
+        font-weight: 520;
+      }
+      .intro h1 span { display: block; }
+      .intro h1 .accent { color: var(--green-dark); }
+      .intro p { margin: 0; font-size: 25px; line-height: 1.35; letter-spacing: -0.025em; }
+      @keyframes rise { to { transform: translateY(0); } }
+
+      .benefits {
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        gap: 64px;
+        align-items: center;
+        padding: 120px 72px 66px;
+      }
+      .benefits h2, .outro h2 {
+        margin: 18px 0 20px;
+        font-size: 62px;
+        line-height: 1.02;
+        letter-spacing: -0.055em;
+        font-weight: 520;
+      }
+      .benefits p { max-width: 500px; font-size: 22px; line-height: 1.45; }
+      .benefit-stack { display: grid; gap: 16px; }
+      .benefit {
+        display: grid;
+        grid-template-columns: 52px 1fr;
+        gap: 18px;
+        align-items: center;
+        min-height: 102px;
+        padding: 18px 22px;
+        border: 1px solid rgba(11, 12, 11, 0.14);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.74);
+        box-shadow: 0 18px 50px rgba(11, 12, 11, 0.08);
+      }
+      .benefit:nth-child(2) { transform: translateX(28px); }
+      .benefit .num {
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: var(--ink);
+        color: white;
+        font-weight: 700;
+      }
+      .benefit strong { display: block; font-size: 20px; margin-bottom: 4px; }
+      .benefit span { color: rgba(11, 12, 11, 0.66); font-size: 16px; }
+
+      .walkthrough { padding: 104px 42px 34px; }
+      .browser-shell {
+        position: relative;
+        height: 560px;
+        overflow: hidden;
+        border: 1px solid rgba(11, 12, 11, 0.18);
+        border-radius: 25px;
+        background: #fff;
+        box-shadow: 0 30px 80px rgba(11, 12, 11, 0.18);
+      }
+      .browser-bar {
+        height: 48px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--line);
+        background: #fafafa;
+      }
+      .dot { width: 10px; height: 10px; border-radius: 50%; background: #d8d8d4; }
+      .address { margin-left: 12px; width: 360px; height: 25px; border-radius: 8px; background: #eceee9; }
+      .browser-shell video {
+        width: 100%;
+        height: calc(100% - 48px);
+        object-fit: cover;
+        display: block;
+        background: #f7f7f5;
+      }
+
+      .mock {
+        position: absolute;
+        inset: 48px 0 0;
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        background: #f7f7f5;
+      }
+      .mock-sidebar { padding: 28px 20px; border-right: 1px solid var(--line); background: #efefea; }
+      .mock-sidebar .nav { height: 14px; margin: 0 0 20px; border-radius: 8px; background: #d9dbd5; }
+      .mock-sidebar .nav:nth-child(2) { width: 72%; }
+      .mock-sidebar .nav:nth-child(3) { width: 86%; }
+      .mock-chat { padding: 34px 48px; }
+      .chat-title { font-size: 18px; font-weight: 700; margin-bottom: 28px; }
+      .bubble { max-width: 700px; padding: 18px 20px; border-radius: 18px; font-size: 19px; line-height: 1.42; }
+      .bubble.user { margin-left: auto; background: #e8e9e5; }
+      .bubble.answer { margin-top: 18px; background: white; border: 1px solid var(--line); }
+      .metric-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+      .metric { padding: 16px; border-radius: 14px; background: #f3fbf6; border: 1px solid rgba(48,150,103,.18); }
+      .metric strong { display: block; font-size: 24px; margin-top: 6px; }
+
+      .lower-third {
+        position: absolute;
+        left: 74px;
+        bottom: 62px;
+        z-index: 8;
+        max-width: 650px;
+        padding: 16px 20px;
+        border-radius: 16px;
+        background: rgba(11, 12, 11, 0.91);
+        color: white;
+        box-shadow: 0 16px 45px rgba(11, 12, 11, 0.22);
+      }
+      .lower-third small { color: var(--green); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+      .lower-third div { margin-top: 4px; font-size: 22px; letter-spacing: -0.02em; }
+
+      .outro { display: grid; place-items: center; padding: 90px; text-align: center; }
+      .outro h2 { max-width: 850px; font-size: 72px; }
+      .outro p { font-size: 23px; margin: 0 0 28px; }
+      .cta { display: inline-flex; padding: 15px 23px; border-radius: 13px; background: var(--ink); color: white; font-size: 17px; font-weight: 700; }
+
+      .progress { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: rgba(11,12,11,.09); z-index: 20; }
+      .progress > div { height: 100%; width: 0; background: linear-gradient(90deg, var(--green-dark), var(--purple)); }
+    </style>
+  </head>
+  <body>
+    <main class="stage">
+      <div class="grid"></div>
+      <div class="orb green"></div>
+      <div class="orb lilac"></div>
+      <div class="brand"><img src="../plugins/puzzle/assets/icon.png" alt="" />Puzzle</div>
+
+      <section class="scene intro active" data-start="0" data-end="4.8">
+        <div class="intro-copy">
+          <div class="eyebrow">Puzzle for ChatGPT</div>
+          <h1><span>Accurate books.</span><span class="accent">At AI speed.</span></h1>
+          <p>Your live accounting system—available in the conversation.</p>
+        </div>
+      </section>
+
+      <section class="scene benefits" data-start="4.8" data-end="10.8">
+        <div>
+          <div class="eyebrow">Built for control</div>
+          <h2>Ask anything.<br />Stay in charge.</h2>
+          <p>Puzzle brings current books into ChatGPT without giving up the safeguards accounting work deserves.</p>
+        </div>
+        <div class="benefit-stack">
+          <div class="benefit"><div class="num">01</div><div><strong>Read-only by default</strong><span>Explore safely before allowing changes.</span></div></div>
+          <div class="benefit"><div class="num">02</div><div><strong>You choose the companies</strong><span>OAuth access stays scoped to what you select.</span></div></div>
+          <div class="benefit"><div class="num">03</div><div><strong>Confirmed before it changes</strong><span>You remain in control of the books.</span></div></div>
+        </div>
+      </section>
+
+      <section class="scene walkthrough" data-start="10.8" data-end="39.5">
+        <div class="browser-shell">
+          <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="address"></span></div>
+          <video id="walkthrough" muted playsinline preload="auto" src="./walkthrough.mp4"></video>
+          <div class="mock" id="mock">
+            <div class="mock-sidebar"><div class="nav"></div><div class="nav"></div><div class="nav"></div></div>
+            <div class="mock-chat">
+              <div class="chat-title">Puzzle</div>
+              <div class="bubble user">What’s our runway, and how has monthly burn changed?</div>
+              <div class="bubble answer">Your current runway is <strong>18.4 months</strong>. Burn improved over the last three months.
+                <div class="metric-row"><div class="metric">May<strong>$84k</strong></div><div class="metric">June<strong>$78k</strong></div><div class="metric">July<strong>$71k</strong></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lower-third"><small id="chapter">Live answers</small><div id="chapter-copy">Runway and burn, grounded in the books</div></div>
+      </section>
+
+      <section class="scene outro" data-start="39.5" data-end="46">
+        <div>
+          <div class="eyebrow">Puzzle × ChatGPT</div>
+          <h2>From question to trusted answer.</h2>
+          <p>Accurate, current books—with less waiting and more control.</p>
+          <span class="cta">puzzle.io</span>
+        </div>
+      </section>
+
+      <div class="progress"><div id="progress"></div></div>
+    </main>
+
+    <script>
+      const DURATION = 46;
+      const params = new URLSearchParams(location.search);
+      const started = performance.now();
+      const scenes = [...document.querySelectorAll('.scene')];
+      const video = document.querySelector('#walkthrough');
+      const mock = document.querySelector('#mock');
+      const chapter = document.querySelector('#chapter');
+      const chapterCopy = document.querySelector('#chapter-copy');
+      const chapters = [
+        [10.8, 18.2, 'Live answers', 'Runway and burn, grounded in the books'],
+        [18.2, 25.3, 'Financial reports', 'Pull an income statement and explain what changed'],
+        [25.3, 32.2, 'Clean books', 'Find the transactions that still need attention'],
+        [32.2, 39.5, 'Money in motion', 'See AP aging, invoices, and vendor spend'],
+      ];
+
+      video.addEventListener('canplay', () => { mock.style.display = 'none'; });
+      video.addEventListener('error', () => { mock.style.display = 'grid'; });
+
+      function tick() {
+        const forced = Number(params.get('t'));
+        const t = Number.isFinite(forced) && params.has('t') ? forced : (performance.now() - started) / 1000;
+        scenes.forEach((scene) => {
+          const active = t >= Number(scene.dataset.start) && t < Number(scene.dataset.end);
+          scene.classList.toggle('active', active);
+        });
+        document.querySelector('#progress').style.width = `${Math.min(100, (t / DURATION) * 100)}%`;
+        const current = chapters.find(([start, end]) => t >= start && t < end);
+        if (current) { chapter.textContent = current[2]; chapterCopy.textContent = current[3]; }
+        if (t >= 10.8 && t < 39.5 && video.paused && video.readyState >= 2) video.play().catch(() => {});
+        requestAnimationFrame(tick);
+      }
+      tick();
+    </script>
+  </body>
+</html>
