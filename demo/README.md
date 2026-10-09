@@ -6,6 +6,7 @@ Reusable 1280×720 motion-design wrapper for the OpenAI review walkthrough and l
 - `walkthrough.mp4` is an optional real screen capture. Without it, the composition renders a polished storyboard fallback.
 - `walkthrough-review.mp4` is the full, unedited product capture used by review mode.
 - `narration.txt` is the voiceover script.
+- `review-narration.txt` is the factual, intermittent cue sheet for the real review walkthrough.
 - `voiceover.mp3` and rendered videos are generated artifacts and are intentionally ignored.
 
 The 46-second timeline uses Puzzle's current public-site visual language: warm off-white, black,

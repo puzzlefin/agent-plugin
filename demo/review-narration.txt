@@ -1,0 +1,39 @@
+# Review-demo narration cues
+
+Each cue starts only after the corresponding result is visibly settled. Leave the prompt, tool-use
+state, tables, and key figures quiet long enough to read. Do not bridge every scene with narration.
+
+[OPEN — after the branded title resolves]
+This is Puzzle in ChatGPT, connected to a dedicated demo company with read-only access.
+
+[RUNWAY — after the answer and discrepancy are visible]
+Puzzle returned three completed months of cash burn: twenty-seven thousand six hundred sixty-three
+dollars in July, thirty-four thousand four hundred ninety-five in August, and thirty-seven thousand
+sixty-one in September. It also found conflicting cash balances, so ChatGPT flagged the discrepancy
+instead of treating the runway estimate as reliable.
+
+[INCOME STATEMENT — after the comparison appears]
+For September, Puzzle returned accrual-basis net income of one hundred fifty-four thousand seven
+hundred nineteen dollars and ninety-eight cents—up twenty-five percent from August. ChatGPT traced
+the change primarily to higher transaction revenue.
+
+[UNCATEGORIZED — after the one-line result appears]
+Puzzle found no September transactions that still needed a category.
+
+[ACCOUNTS PAYABLE — after the total and vendor table appear]
+The overdue-bills check returned fifty-five unpaid bills totaling one hundred eighty-six thousand
+three hundred fifty-eight dollars and sixty-one cents. ChatGPT also kept Puzzle's reconciliation
+caveat visible because the aging report did not agree with the bill list.
+
+[VENDOR SPEND — after the quarter and result appear]
+For the third quarter, the report returned one vendor: Stripe, at one hundred forty-seven thousand
+four hundred fifty-eight dollars and sixteen cents. ChatGPT said that plainly instead of inventing
+four more vendors.
+
+[DELETE REQUEST — after the confirmation boundary appears]
+The March request found four thousand three hundred fifty-six transactions. ChatGPT stated that
+nothing had been deleted and required explicit confirmation before any bulk removal. No change was
+made.
+
+[CLOSE — over the first beat of the branded footer]
+From question to trusted answer: Puzzle and ChatGPT.
