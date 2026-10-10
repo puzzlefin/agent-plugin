@@ -1,5 +1,6 @@
 {
   "review": {
+    "demo_recording_url": "https://media.githubusercontent.com/media/puzzlefin/agent-plugin/openai-directory-description/demo/puzzle-chatgpt-review-demo.mp4",
     "test_cases": {
       "positive": [
         {
