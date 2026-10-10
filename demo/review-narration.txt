@@ -4,36 +4,32 @@ Each cue starts only after the corresponding result is visibly settled. Leave th
 state, tables, and key figures quiet long enough to read. Do not bridge every scene with narration.
 
 [OPEN — after the branded title resolves]
-This is Puzzle in ChatGPT, connected to a dedicated demo company with read-only access.
+Here's Puzzle, connected to a demo company in ChatGPT.
 
 [RUNWAY — after the answer and discrepancy are visible]
-Puzzle returned three completed months of cash burn: twenty-seven thousand six hundred sixty-three
-dollars in July, thirty-four thousand four hundred ninety-five in August, and thirty-seven thousand
-sixty-one in September. It also found conflicting cash balances, so ChatGPT flagged the discrepancy
-instead of treating the runway estimate as reliable.
+First, I'm asking about cash runway. It pulls the burn trend—and, yep, it notices that two cash
+balances disagree, so it won't pretend the runway number is reliable.
 
 [INCOME STATEMENT — after the comparison appears]
-For September, Puzzle returned accrual-basis net income of one hundred fifty-four thousand seven
-hundred nineteen dollars and ninety-eight cents—up twenty-five percent from August. ChatGPT traced
-the change primarily to higher transaction revenue.
+Now I'm asking for the September income statement. It comes back with one hundred fifty-four
+thousand seven hundred nineteen dollars and ninety-eight cents in net income, up twenty-five
+percent, mostly from transaction revenue.
 
 [UNCATEGORIZED — after the one-line result appears]
-Puzzle found no September transactions that still needed a category.
+Next, I'm checking for uncategorized transactions. There aren't any left for September.
 
 [ACCOUNTS PAYABLE — after the total and vendor table appear]
-The overdue-bills check returned fifty-five unpaid bills totaling one hundred eighty-six thousand
-three hundred fifty-eight dollars and sixty-one cents. ChatGPT also kept Puzzle's reconciliation
-caveat visible because the aging report did not agree with the bill list.
+Now I'm asking what's overdue. It finds fifty-five bills totaling one hundred eighty-six thousand
+three hundred fifty-eight dollars and sixty-one cents, and it keeps the warning that the aging
+report doesn't reconcile with the bill list.
 
 [VENDOR SPEND — after the quarter and result appear]
-For the third quarter, the report returned one vendor: Stripe, at one hundred forty-seven thousand
-four hundred fifty-eight dollars and sixteen cents. ChatGPT said that plainly instead of inventing
-four more vendors.
+Here I'm asking for the top five vendors. The report only has Stripe, so that's all it gives me—no
+made-up extra vendors.
 
 [DELETE REQUEST — after the confirmation boundary appears]
-The March request found four thousand three hundred fifty-six transactions. ChatGPT stated that
-nothing had been deleted and required explicit confirmation before any bulk removal. No change was
-made.
+And now I'm asking it to delete March transactions. It finds four thousand three hundred fifty-six,
+but pauses for explicit confirmation. Nothing gets deleted.
 
 [CLOSE — over the first beat of the branded footer]
-From question to trusted answer: Puzzle and ChatGPT.
+That's Puzzle in ChatGPT: real answers, with the caveats intact.
