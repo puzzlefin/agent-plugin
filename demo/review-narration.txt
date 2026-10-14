@@ -1,0 +1,35 @@
+# Review-demo narration cues
+
+Each cue starts only after the corresponding result is visibly settled. Leave the prompt, tool-use
+state, tables, and key figures quiet long enough to read. Do not bridge every scene with narration.
+
+[OPEN — after the branded title resolves]
+Here's Puzzle, connected to a demo company in ChatGPT.
+
+[RUNWAY — after the answer and discrepancy are visible]
+First, I'm asking about cash runway. It pulls the burn trend—and, yep, it notices that two cash
+balances disagree, so it won't pretend the runway number is reliable.
+
+[INCOME STATEMENT — after the comparison appears]
+Now I'm asking for the September income statement. It comes back with one hundred fifty-four
+thousand seven hundred nineteen dollars and ninety-eight cents in net income, up twenty-five
+percent, mostly from transaction revenue.
+
+[UNCATEGORIZED — after the one-line result appears]
+Next, I'm checking for uncategorized transactions. There aren't any left for September.
+
+[ACCOUNTS PAYABLE — after the total and vendor table appear]
+Now I'm asking what's overdue. It finds fifty-five bills totaling one hundred eighty-six thousand
+three hundred fifty-eight dollars and sixty-one cents, and it keeps the warning that the aging
+report doesn't reconcile with the bill list.
+
+[VENDOR SPEND — after the quarter and result appear]
+Here I'm asking for the top five vendors. The report only has Stripe, so that's all it gives me—no
+made-up extra vendors.
+
+[DELETE REQUEST — after the confirmation boundary appears]
+And now I'm asking it to delete March transactions. It finds four thousand three hundred fifty-six,
+but pauses for explicit confirmation. Nothing gets deleted.
+
+[CLOSE — over the first beat of the branded footer]
+That's Puzzle in ChatGPT: real answers, with the caveats intact.

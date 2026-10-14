@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "puzzle",
   "version": "1.0.0",
-  "description": "Read and manage a company's books in Puzzle: transactions, categorization, bills, invoices, reconciliation, reports and runway.",
+  "description": "Puzzle is a full-service accounting system that connects to banking, card, payroll and payment providers for accurate, current books.",
   "author": { "name": "Puzzle", "email": "support@puzzle.io", "url": "https://puzzle.io" },
   "homepage": "https://app.puzzle.io/mcp/docs",
   "repository": "https://github.com/puzzlefin/agent-plugin",
@@ -12,8 +12,8 @@
     "com.openai": {
       "interface": {
         "displayName": "Puzzle",
-        "shortDescription": "Your startup's books",
-        "longDescription": "Puzzle keeps a startup's double-entry books from its bank, card, payroll and payment data. Connect your Puzzle account to ask about cash, burn and runway, pull a balance sheet or income statement, review and categorize transactions, work through bills and invoices, and reconcile accounts.\n\nThe connection is read-only until you turn on write access, and every change to the books is confirmed with you before it is made. You choose which companies the connection can see when you sign in, and you can revoke it any time in Puzzle under Settings → Connected apps.",
+        "shortDescription": "Full-service accounting",
+        "longDescription": "Accurate books. AI speed. Puzzle is a full-service accounting system for startups and small businesses. Connect banking, credit card, payroll and payment providers—including Stripe, Brex, Mercury, Ramp, Deel and Gusto—so your books stay accurate and current in one system.\n\nAsk about cash, burn and runway; pull a balance sheet, income statement or cash flow statement; review and categorize transactions; work through bills and invoices; reconcile accounts; and manage revenue recognition and month-end close. Puzzle's AI agents handle the repetitive accounting work while you stay in control.\n\nThe connection starts read-only. You choose which companies it can see, and changes to the books require write access and your confirmation. Available actions depend on your Puzzle plan, role, enabled features and connected financial providers. You can revoke access any time in Puzzle under Settings → Connected apps.",
         "developerName": "Puzzle",
         "category": "Finance",
         "capabilities": [
