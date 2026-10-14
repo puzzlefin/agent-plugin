@@ -17,6 +17,7 @@ plugins/puzzle/
   mcp.json                  ChatGPT / Codex MCP server (streamable-http)
   .claude-plugin/plugin.json  Claude / Claude Code manifest
   .mcp.json                 Claude / Claude Code MCP server (http)
+  README.md                 Claude directory listing README (the directory requires one in the plugin folder)
   skills/puzzle-books/      how to work with the books: company, write access, cash vs accrual
   skills/get-started/       first-run (ChatGPT onboardingSkill)
   assets/                   logo.png 512², icon.png 96², logo.svg

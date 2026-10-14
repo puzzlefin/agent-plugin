@@ -57,4 +57,4 @@ rmSync(dist, { recursive: true, force: true });
 mkdirSync(dist);
 zip("puzzle-chatgpt.zip", plugin, ["plugin.json", "mcp.json", ...shared]);
 buildDirectoryZip();
-zip("puzzle-claude.zip", plugin, [".claude-plugin/plugin.json", ".mcp.json", ...shared]);
+zip("puzzle-claude.zip", plugin, [".claude-plugin/plugin.json", ".mcp.json", "README.md", ...shared]);
